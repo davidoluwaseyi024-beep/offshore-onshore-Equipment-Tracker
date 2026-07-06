@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Brand — deep industrial navy (chrome: sidebar, header, hero) */
+  --color-brand-50: #f0f4f8;
+  --color-brand-100: #d9e2ec;
+  --color-brand-200: #bcccdc;
+  --color-brand-300: #9fb3c8;
+  --color-brand-400: #627d98;
+  --color-brand-500: #486581;
+  --color-brand-600: #334e68;
+  --color-brand-700: #243b53;
+  --color-brand-800: #17293c;
+  --color-brand-900: #102a43;
+  --color-brand-950: #0a1929;
+
+  /* Accent — industrial safety amber (primary actions, highlights) */
+  --color-accent-100: #fef3c7;
+  --color-accent-200: #fde68a;
+  --color-accent-300: #fcd34d;
+  --color-accent-400: #fbbf24;
+  --color-accent-500: #f59e0b;
+  --color-accent-600: #d97706;
+  --color-accent-700: #b45309;
+
+  /* Status — reserved, never reused for generic series (equipment status,
+     maintenance urgency). Values from the validated dataviz reference palette. */
+  --color-status-good: #0ca30c;
+  --color-status-warning: #fab219;
+  --color-status-serious: #ec835a;
+  --color-status-critical: #d03b3b;
+  --color-status-neutral: #7c8a9a;
+
+  /* Chart chrome */
+  --color-chart-surface: #fcfcfb;
+  --color-chart-ink: #0b0b0b;
+  --color-chart-ink-secondary: #52514e;
+  --color-chart-ink-muted: #898781;
+  --color-chart-grid: #e1e0d9;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: var(--color-brand-300);
+    border-radius: 9999px;
+  }
+}
