@@ -5,12 +5,13 @@ pytestmark = pytest.mark.django_db
 
 
 class TestReportPermissions:
-    def test_technician_cannot_generate_reports(self, technician_client):
+    def test_technician_can_generate_reports(self, technician_client):
         response = technician_client.post(
             reverse("report-generate"),
             {"report_type": "equipment_summary", "format": "csv", "period": "full_history"},
         )
-        assert response.status_code == 403
+        assert response.status_code == 201
+        assert response.data["status"] == "completed"
 
     def test_engineer_can_generate_csv_report(self, engineer_client):
         response = engineer_client.post(

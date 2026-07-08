@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useEquipmentList } from "../../hooks/useEquipment";
 import { useAuth } from "../../context/AuthContext";
-import { canWriteEquipment } from "../../utils/permissions";
+import { canCreateEquipment } from "../../utils/permissions";
 import { Button } from "../../components/ui/Button";
 import { Pagination } from "../../components/ui/Pagination";
 import type { EquipmentQuery } from "../../api/equipment";
@@ -23,7 +23,7 @@ export function EquipmentListPage() {
           <h1 className="text-2xl font-semibold text-brand-950">Equipment</h1>
           <p className="text-sm text-slate-500">Track and manage your fleet.</p>
         </div>
-        {user && canWriteEquipment(user.role) && (
+        {user && canCreateEquipment() && (
           <Button onClick={() => navigate("/equipment/new")}>+ Add Equipment</Button>
         )}
       </div>

@@ -11,11 +11,16 @@ class TestEquipmentPermissionMatrix:
         for client in (admin_client, engineer_client, technician_client):
             assert client.get(reverse("equipment-list")).status_code == 200
 
-    def test_technician_cannot_create_equipment(self, technician_client):
+    def test_technician_can_create_equipment(self, technician_client, db):
+        from conftest import CategoryFactory, SiteFactory
+
+        category = CategoryFactory()
+        site = SiteFactory()
         response = technician_client.post(
-            reverse("equipment-list"), {"name": "Drill", "serial_number": "SN-1", "category": 1, "site": 1}
+            reverse("equipment-list"),
+            {"name": "Drill", "serial_number": "SN-TECH-1", "category": category.id, "site": site.id},
         )
-        assert response.status_code == 403
+        assert response.status_code == 201
 
     def test_engineer_can_create_equipment(self, engineer_client, db):
         from conftest import CategoryFactory, SiteFactory

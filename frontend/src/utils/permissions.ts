@@ -5,6 +5,7 @@ import type { Role } from "../types/user";
 // This is a UX convenience for hiding actions the API would reject anyway —
 // the API remains the actual authority.
 
+export const canCreateEquipment = () => true;
 export const canWriteEquipment = (role: Role) => role === "admin" || role === "engineer";
 export const canDeleteEquipment = (role: Role) => role === "admin";
 export const canChangeEquipmentStatus = () => true;
@@ -16,7 +17,7 @@ export const canDeleteMaintenance = (role: Role) => role === "admin" || role ===
 export const canManageUsers = (role: Role) => role === "admin";
 export const canReadUsers = (role: Role) => role === "admin" || role === "engineer";
 
-export const canGenerateReports = (role: Role) => role === "admin" || role === "engineer";
+export const canGenerateReports = (role: Role) => role === "admin" || role === "engineer" || role === "technician";
 
 export const canViewGlobalAuditLog = (role: Role) => role === "admin" || role === "engineer";
 

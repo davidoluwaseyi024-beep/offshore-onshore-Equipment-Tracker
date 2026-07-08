@@ -41,7 +41,7 @@ class ReportScheduleViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = ReportSchedule.objects.all()
         user = self.request.user
-        if user.role == RoleChoices.ENGINEER:
+        if user.role in {RoleChoices.ENGINEER, RoleChoices.TECHNICIAN}:
             queryset = queryset.filter(created_by=user)
         return queryset
 

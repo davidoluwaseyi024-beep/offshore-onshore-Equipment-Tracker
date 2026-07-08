@@ -4,12 +4,12 @@ from core.constants import RoleChoices
 
 
 class ReportPermission(BasePermission):
-    """Reports and their schedules are admin + engineer only."""
+    """Reports and their schedules are admin, engineer, and technician only."""
 
     def has_permission(self, request, view):
         user = request.user
         return bool(
             user
             and user.is_authenticated
-            and user.role in {RoleChoices.ADMIN, RoleChoices.ENGINEER}
+            and user.role in {RoleChoices.ADMIN, RoleChoices.ENGINEER, RoleChoices.TECHNICIAN}
         )

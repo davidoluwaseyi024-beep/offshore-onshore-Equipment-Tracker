@@ -5,11 +5,11 @@ from core.constants import RoleChoices
 
 class EquipmentPermission(BasePermission):
     """
-    Read: all roles. Create/update: admin + engineer. Delete/restore:
-    admin only. Status change (including marking equipment missing) is
-    handled by a separate, more permissive check on the custom action
-    itself (see StatusChangePermission) since technicians must be able
-    to report status changes in the field.
+    Read: all roles. Create: any authenticated user. Update: admin +
+    engineer. Delete/restore: admin only. Status change (including
+    marking equipment missing) is handled by a separate, more permissive
+    check on the custom action itself (see StatusChangePermission) since
+    technicians must be able to report status changes in the field.
     """
 
     def has_permission(self, request, view):
@@ -17,6 +17,8 @@ class EquipmentPermission(BasePermission):
         if not (user and user.is_authenticated):
             return False
         if request.method in SAFE_METHODS:
+            return True
+        if view.action == "create":
             return True
         if view.action == "destroy" or view.action == "restore":
             return user.role == RoleChoices.ADMIN
