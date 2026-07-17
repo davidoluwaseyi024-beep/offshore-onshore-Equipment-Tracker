@@ -4,7 +4,7 @@ from config.settings.base import env
 DEBUG = False
 import requests
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")  + [".elb.amazonaws.com"]
 
 try:
     token = requests.put(
