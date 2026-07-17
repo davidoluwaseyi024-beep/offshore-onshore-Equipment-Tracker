@@ -4,7 +4,7 @@ from config.settings.base import env
 DEBUG = False
 import requests
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")  + [".elb.amazonaws.com"]
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS") + [".elb.amazonaws.com"]
 
 try:
     token = requests.put(
@@ -20,8 +20,6 @@ try:
     ).text
     ALLOWED_HOSTS.append(local_ip)
 
-    # Also allow the instance's public IP — the health checker/agent
-    # sometimes hits the instance directly over its public address.
     try:
         public_ip = requests.get(
             'http://169.254.169.254/latest/meta-data/public-ipv4',
@@ -57,6 +55,3 @@ STORAGES = {
 MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")  # noqa: F405
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-# ci/cd test trigger
-# retry ci cd
-Sat, Jul 18, 2026 12:23:28 AM
