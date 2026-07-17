@@ -1,1 +1,2 @@
 -r requirements/prod.txt
+requests>=2.31.0
